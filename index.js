@@ -1,10 +1,10 @@
-function rob(nums) {
-  let prevMax = 0;
-  let currMax = 0;
-  for (const num of nums) {
-    const temp = currMax;
-    currMax = Math.max(prevMax + num, currMax);
-    prevMax = temp;
+function hasCycle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
-  return currMax;
+  return false;
 }
