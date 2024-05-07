@@ -1,10 +1,35 @@
-function hasCycle(head) {
-  let slow = head;
-  let fast = head;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    if (slow === fast) return true;
+const cycleSort = (arr) => {
+  for (let start = 0; start < arr.length - 1; start++) {
+    let item = arr[start];
+    let pos = start;
+    for (let i = start + 1; i < arr.length; i++) {
+      if (arr[i] < item) {
+        pos++;
+      }
+    }
+    if (pos === start) {
+      continue;
+    }
+    while (item === arr[pos]) {
+      pos++;
+    }
+    if (pos !== start) {
+      [item, arr[pos]] = [arr[pos], item];
+    }
+    while (pos !== start) {
+      pos = start;
+      for (let i = start + 1; i < arr.length; i++) {
+        if (arr[i] < item) {
+          pos++;
+        }
+      }
+      while (item === arr[pos]) {
+        pos++;
+      }
+      if (item !== arr[pos]) {
+        [item, arr[pos]] = [arr[pos], item];
+      }
+    }
   }
-  return false;
-}
+  return arr;
+};
